@@ -1,4 +1,6 @@
-import { Box, Heading, Link, List, ListItem } from '@chakra-ui/react';
+import { Box, Heading, Link, List, ListItem, VStack } from '@chakra-ui/react';
+import Quiz from '../components/Quiz';
+import quizData from '../data/quizData';
 
 export default function ProblemSets() {
   return (
@@ -6,29 +8,44 @@ export default function ProblemSets() {
       <Heading as="h1" size="xl" mb={6}>
         Problem Sets
       </Heading>
-      <List spacing={3}>
-        <ListItem>
-          <Link href="/static/addition.pdf" isExternal>
-            Download Addition Problems PDF
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/static/subtraction.pdf" isExternal>
-            Download Subtraction Problems PDF
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/static/multiplication.pdf" isExternal>
-            Download Multiplication Problems PDF
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/static/division.pdf" isExternal>
-            Download Division Problems PDF
-          </Link>
-        </ListItem>
-        {/* Static quizzes can be added here in the future */}
-      </List>
+      <VStack spacing={8}>
+        <Box>
+          <Heading as="h2" size="lg" mb={4}>
+            Quizzes
+          </Heading>
+          <Quiz questions={quizData.addition} />
+          <Quiz questions={quizData.subtraction} />
+          <Quiz questions={quizData.multiplication} />
+          <Quiz questions={quizData.division} />
+        </Box>
+        <Box>
+          <Heading as="h2" size="lg" mb={4}>
+            Downloadable PDFs
+          </Heading>
+          <List spacing={3}>
+            <ListItem>
+              <Link href="/static/addition.pdf" isExternal>
+                Download Addition Problems PDF
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/static/subtraction.pdf" isExternal>
+                Download Subtraction Problems PDF
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/static/multiplication.pdf" isExternal>
+                Download Multiplication Problems PDF
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/static/division.pdf" isExternal>
+                Download Division Problems PDF
+              </Link>
+            </ListItem>
+          </List>
+        </Box>
+      </VStack>
     </Box>
   );
 }
