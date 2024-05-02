@@ -1,5 +1,8 @@
+import { Database } from '@replit/database';
 import bcrypt from 'bcryptjs';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+const db = new Database();
 
 export default async function handler(req = NextApiRequest, res = NextApiResponse) {
   if (req.method === 'POST') {
@@ -12,9 +15,8 @@ export default async function handler(req = NextApiRequest, res = NextApiRespons
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
 
-      // Here you would store the email, phoneNumber, and hashedPassword in the database
-      // For now, we'll just log it to the console
-      console.log('User signed up with:', { email, phoneNumber, hashedPassword });
+      // Store the email, phoneNumber, and hashedPassword in the Replit database
+      await db.set(email, { phoneNumber, hashedPassword });
 
       // Respond with a success message
       res.status(200).json({ message: 'Sign-up successful' });
